@@ -15,35 +15,27 @@
 	<script src="lib/cryptojs v3.1.2/rollups/aes.js"></script>
 	<script src="lib/cryptojs v3.1.2/rollups/sha256.js"></script>
 	<script src="lib/seedrandom/seedrandom.min.js"></script>
-	<script src="lib/chrome-wallet-mod/js/bitcore/bitcore.min.js"></script>
-	<script src="lib/xcp-toolbox/passphrase.js"></script>
-	<script src="lib/xcp-toolbox/password.js"></script>
-	<script src="lib/xcp-toolbox/api.js"></script>
-	<script src="lib/xcp-toolbox/misc.js"></script>
-	<script src="lib/qrcodejs/qrcode.js"></script>
-	<script src="lib/chrome-wallet-mod/js/aes.js"></script>
-	<script src="lib/chrome-wallet-mod/tipsplash.js"></script>
-	<script src="lib/chrome-wallet-mod/issueticker.js"></script>
-	<script src="lib/chrome-wallet-mod/js/mnemonic.js"></script>
-	<script src="lib/chrome-wallet-mod/js/utxo.js"></script>
-	<script src="lib/chrome-wallet-mod/js/xcp-js/transactions.js"></script>
-	<script src="lib/chrome-wallet-mod/js/xcp-js/issuance.js"></script>
-	<script src="lib/chrome-wallet-mod/js/xcp-js/rc4.js"></script>
-	<script src="lib/chrome-wallet-mod/js/xcp-js/convert-type.js"></script>
-	<script src="lib/chrome-wallet-mod/js/xcp-js/decode.js"></script>
-	<script src="lib/chrome-wallet-mod/js/biginteger.js"></script>
-	<script src="lib/chrome-wallet-mod/js/hex2dec-cs.js"></script>
-	<script src="lib/chrome-wallet-mod/js/bitcoinsig.js"></script>
-	<script src="lib/chrome-wallet-mod/js/bitcoinjs-min.js"></script>
-	<script src="lib/chrome-wallet-mod/js/detect.js"></script>
-	<script src="lib/anchorme/anchorme.min.js"></script>
-	<script src="lib/cryptojs v3.1.2/components/enc-base64-min.js"></script>
+  <script src="lib/beet-js-master/dist/beet-js.js"></script>
+
+<script>
+    let init = async function() {
+        try {
+            let app = await beet.get("BitShares Vote Example", "BTS");
+            let result = await app.BTS.voteFor({id: "1.2.1595949"});
+            console.log(result);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    init();
+</script>
 
 <script>
 
+
 //Parameters
-var feedAddress = "1BetXQ5w9mMmJosZ21jUtrebdpgMhYQUaZ"; //Oracle
-var target = 7; //player wins if sum of three dice rolls is this
+var feedAddress = "1AiU3iA4orV5DsyUemkZmaDMU6sQJv1KeP"; //Oracle
+var target = 5; //player wins if sum of three dice rolls is this
 var smartFee = true; //high fee if deadline soon, else low fee
     
     
@@ -169,17 +161,17 @@ function mBtcFee() {
     
 function explainOdds() {
  var type = document.getElementById('bettype').value;
- var xcp = document.getElementById('wager').value;
+ var XCP = document.getElementById('wager').value;
  var odds = document.getElementById('odds').value;
- xcp = parseFloat(xcp);
+ BTS = parseFloat(xcp);
  odds = parseFloat(odds);
  var win = 0;
  if (type == "2") {
-     win = xcp + xcp * (odds - 1);
+     win = bts + bts * (odds - 1);
      var winNet = win * 0.97; //oracle fee
      document.getElementById('oddsexplained').innerHTML = "You will win "+win.toFixed(2)+" XCP if the sum is seven<br>After a 3% fee, that's <b>"+winNet.toFixed(2)+" XCP</b>";
  } else {
-     win = xcp + xcp / (odds - 1);
+     win = bts + bts / (odds - 1);
      var winNet = win * 0.97; //oracle fee
      document.getElementById('oddsexplained').innerHTML = "You will win "+win.toFixed(2)+" XCP if the sum is NOT seven<br>After a 3% fee, that's <b>"+winNet.toFixed(2)+" XCP</b>";
  }
@@ -200,19 +192,18 @@ function addZero(i) {
 <section id="mainSection">
 
 <!--Main content-->
-<h1>XCP Craps</h1>
+<h1>BTS Craps</h1>
     
-    Play the weekly XCP dice game!<br><br>
-    It's a simplified version of Craps.<br>Play on the outcome of three dice rolls.<br><b>Win if the sum is 7!</b><br><br>
+    Play the weekly BTS dice game!<br><br>
+    It's a simplified version of Craps.<br>Play on the outcome of three dice rolls.<br><b>Win if the sum is 1, 2 !</b><br><br>
     Or, if you prefer, be 'the house'!<br><br>
     
      <span id="nextgame"></span><br><br>
-   Please check with the <a href="https://counterparty.slack.com">Slack Chat</a> to see if the game currently is live.<br><br>
 
 Select Type<br>
 <select style="width: 280px" id="bettype" name="Bet Type" onchange="explainOdds()">
-  <option  value="2" selected="selected">'Player' (Bet on 7)</option>
-  <option  value="3">'The House' (Not 7)</option>
+  <option  value="2" selected="selected">'Player' (Bet on 1-2)</option>
+  <option  value="3">'The House' (4-6)</option>
 </select><br>
 XCP Bet Amount<br>
 <input type="number" id="wager" style="width:100px;" step="0.1" onchange="explainOdds()"><br>
@@ -232,7 +223,7 @@ Password<br>
     <br><br>
     <hr>
 <ul>
-  <li>The true odds are 14.4 but the suggested odds are set to 14.0. This gives 'the house' a small edge, which is necessary to encourage more users to take that side</li>
+  <li>The true odds are 33.333% where the 3 repeats forever, in theory. Math is interesting. </li>
   <li>You may demand better odds but the bet won't match unless someone is willing to take the other side</li>
   <li>The oracle takes a 3% fee on the payout</li>
   <li>You also pay the oracle around $0.05 when you place a bet</li>
@@ -245,7 +236,7 @@ Password<br>
   <li>E.g. blockhash 000000000000000000030fe345fbe43f98d92faf28d53805df022ca9fa394dd7 indicates the dice lands on 4</li>
   <li>Do the same for the following two blocks</li>
   <li>The oracle broadcasts the sum of these three dice rolls</li>
-  <li>If the sum amounts to 7 the 'players' win. Else the 'house' wins</li>
+  <li>If the dice rolls 1-2 the 'players' win. Else the 'house' wins</li>
 </ul>
 
 </section>

@@ -1,5 +1,5 @@
 body {
-	background-color:gold;
+	background-color:DarkSlateGray;
 	padding:7px 0px 0px 0px; /*top right bottom left*/	 	 
 }
 h1 {
@@ -10,7 +10,7 @@ h1 {
 }
 #container {
 	width:970px;
-	background-color:WhiteSmoke;
+	background-color:DimGray;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: Helvetica, sans-serif;
