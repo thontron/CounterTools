@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title id="pageTitle"></title>
+	<link rel="shortcut icon" href="img/xcpblackyellow.ico">
+	<link href="settings/styles.css" rel="stylesheet">
+	<script src="settings/general.txt"></script>
+	<script src="settings/assets.txt"></script>
+	<script src="settings/menu.txt"></script>
+	<script src="settings/encryptedpp.txt"></script>
+	<script src="settings/asset_list.txt"></script>
+	<script src="drawmenus.js"></script>
+	<script src="lib/jquery/jquery-2.1.4.js"></script>
+	
+<script>
+var btcPrice = '?';
+var assetAmountSet = false;
+var btcAmount = 0;
+var recipient = '';
+var feeAmount = 0;
+var assetName = '';
+var assetAmount = 0;
+var sendFrom = '';
+
+</script>
+
+</head>
+<body onload="drawMenus();prepareValues();">
+<div id="container">
+<header id="topHeader"></header>
+<nav id="leftMenu"></nav>
+<section id="mainSection">
+
+<div class="boxInfo">If the recipient's wallet is <i>not</i> Counterparty aware, it will simply receive the Bitcoins and ignore the Counterpaty asset.<br><br>To them the Bitcoin transfer is just like any other Bitcoin transacion. There is no risk involved.<br><br>Your added cost of including a Counterparty asset is zero.<br><br>You can distribute <i>coupons</i> and <i>discount cards</i>. Those who know how to read Counterparty data will see your promototions.</div>
+<h1>Piggyback Transaction</h1>
+
+Send Bitcoin and embed Counterparty tokens. 
+<br><br>
+BTS Amount<br>
+<input type="text" id="toreceiver" style="width:150px;" placeholder="0" onchange="commentAmount();" onClick="document.getElementById('sendusd').innerHTML='';"> <span id="sendusd"></span><br>
+Send To<br>
+<input type="text" id="sendto" placeholder="Address or Alias" style="width:400px;" onchange="commentAddress();"> <span id="addrfeedback"></span><br>
+Piggyback Asset<br>
+<input type="text" id="asset" style="width:150px;"><br>
+Asset Amount<br>
+<input type="text" id="assetamount" style="width:150px;"  placeholder="0"  onchange="assetAmountSet=true;"><br>
+<span id="optionslist"></span><br>
+
+<input type="button" onclick="validateTx()" id="submit" value="STAKE"><br>
+<div id="confirmsend">&nbsp;</div>
+<div id="sendfeedback">&nbsp;</div>
+
+</section>
+<footer id="bottomFooter"></footer>
+</div>
+
+</body>
+</html>
